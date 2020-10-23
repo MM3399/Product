@@ -1,0 +1,52 @@
+<main>
+    <div class="row">
+        <div class="dropdown col offset-11">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sort
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" (click)="sortByPrice()">By Price</button>
+                <button class="dropdown-item" (click)="sortByName()">By name</button>
+            </div>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-sm-4" *ngFor= "let product of products;let i=index">
+        <section class="card" style="margin: 15px;">
+            <img [src]=product.imagePath  class="card-img-top" [alt]="product.name">
+            <div class="card-body">
+            <h5 class="card-title">{{product.name}}</h5>
+            <p class="card-text">Price :- ${{product.price}}</p>
+            <button (click)="productDetail(product._id)" class="btn btn-primary">Read More</button>
+            </div>
+        </section>
+    </div>
+    </div>
+</main>
+<form #form="ngForm" style="margin: 10px;">
+    <h2 style="margin-left: 10px;">Add Products</h2>
+    <div class="form-group col-md-6">
+        <label for="Name">Name</label>
+        <input type="text" name="name" class="form-control col-md-6" [(ngModel)]="productData.name" required>
+    </div>
+    <div class="form-group col-md-6">
+        <label for="Price">Price</label>
+        <input type="number" name="price" class="form-control col-md-6" [(ngModel)]="productData.price" required>
+    </div>
+    <div class="form-group col-md-12">
+        <label for="Description">Description</label>
+        <input type="text" name="description" class="form-control" [(ngModel)]="productData.description" required>
+    </div>
+    <div class="form-group col">
+        <label for="exampleFormControlFile1">Image</label>
+        <input type="file" name="image" class="form-control-file" id="exampleFormControlFile" (change)="handleImageFileInput($event.target.files)">
+    </div>
+    <div class="form-group col-md-6">
+        <label for="Password">Password</label>
+        <input type="password" name="password" class="form-control" [(ngModel)]="productData.password" required>
+    </div>
+    <div class="col">
+    <button (click)="sendFormData()" class="btn btn-primary" [disabled]="!form.valid"  >Submit</button>
+    </div>
+</form>
+
